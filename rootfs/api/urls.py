@@ -8,6 +8,8 @@ from django.conf.urls import include, url
 from rest_framework.authtoken.views import obtain_auth_token as views_obtain_auth_token
 from rest_framework.routers import DefaultRouter
 
+from rest_framework_jwt.views import verify_jwt_token
+
 from api import views
 
 
@@ -122,4 +124,5 @@ urlpatterns = [
         views.CertificateViewSet.as_view({'get': 'list', 'post': 'create'})),
     # list users
     url(r'^users/?$', views.UserView.as_view({'get': 'list'})),
+    url(r'^api-token-verify/', verify_jwt_token),
 ]

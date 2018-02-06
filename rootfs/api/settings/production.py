@@ -153,7 +153,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'api.authentication.PlatformAuthentication',
     ),
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
@@ -349,9 +349,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DEIS_DATABASE_NAME', os.environ.get('DEIS_DATABASE_USER', 'deis')),
-        'USER': os.environ.get('DEIS_DATABASE_USER', ''),
-        'PASSWORD': os.environ.get('DEIS_DATABASE_PASSWORD', ''),
-        'HOST': os.environ.get('DEIS_DATABASE_SERVICE_HOST', ''),
+        'USER': os.environ.get('DEIS_DATABASE_USER', 'gigster'),
+        'PASSWORD': os.environ.get('DEIS_DATABASE_PASSWORD', 'password'),
+        'HOST': os.environ.get('DEIS_DATABASE_SERVICE_HOST', 'localhost'),
         'PORT': os.environ.get('DEIS_DATABASE_SERVICE_PORT', 5432),
         # https://docs.djangoproject.com/en/1.11/ref/databases/#persistent-connections
         'CONN_MAX_AGE': 600,
@@ -406,3 +406,5 @@ if LDAP_ENDPOINT:
     AUTH_LDAP_MIRROR_GROUPS = True
     AUTH_LDAP_FIND_GROUP_PERMS = True
     AUTH_LDAP_CACHE_GROUPS = False
+
+API_URL = os.environ.get('API_URL', 'http://localhost:3000')
